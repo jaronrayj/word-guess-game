@@ -1,0 +1,24 @@
+.banner {
+    position: static;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Luckiest Guy',
+        cursive;
+    font-size: 40px;
+    text-align: center;
+}
+
+body {
+    font-family: 'Fredoka One',
+        cursive;
+}
+
+/* Fonts!
+font-family: 'Coiny',
+cursive;
+font-family: 'Luckiest Guy',
+cursive;
+font-family: 'Fredoka One',
+cursive; */
