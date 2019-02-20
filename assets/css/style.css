@@ -1,11 +1,10 @@
 #banner {
     position: static;
     width: 100%;
-    margin-top: -15px;
+    margin: -2% 0 0 0;
     top: 0;
     left: 0;
     right: 0;
-
 
 }
 
@@ -21,6 +20,7 @@ body {
         cursive;
     width: 100%;
     opacity: 20%;
+    background: #9DFFFF;
 }
 
 #background {
@@ -28,6 +28,11 @@ body {
     filter: brightness(130%);
     z-index: -1;
     width: 100%;
+    bottom: 0;
+}
+
+#pokePicText {
+    margin: auto;
 }
 
 input {}

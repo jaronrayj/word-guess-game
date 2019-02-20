@@ -12,18 +12,28 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Coiny|Fredoka+One|Luckiest+Guy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="./assets/images/Pokeball.PNG" />
 
 </head>
 
 <body>
+    <header class="header">
+        <img id="banner" src="./assets/images/banner3NoWhite.png" alt="Pokemon Banner">
+    </header>
     <img id="background" src="./assets/images/backgroundFun.jpg" alt="">
     <div class="container">
-        <img id="banner" src="./assets/images/banner3NoWhite.png" alt="Pokemon Banner">
+
         <h1>Hangémon!</h1>
 
         <h2>Type letters to catch the Pokémon! (First 151 Pokémon only)</h2>
+        <br>
+
+        <input class="my-1" type="button" value="A Wild Pokémon Appears!" onclick="play()">
+        <audio id="audio" src="assets/sounds/107-battle (vs wild pokemon).mp3"></audio>
+
+        <input class="my-1" type="button" value="Gotcha! Wild currentPokemon was caught!" onclick="caught()">
+        <audio id="caught" src="assets/sounds/108-victory (vs wild pokemon).mp3"></audio>
 
         <div id="wildAppear"></div>
         <div id="pokemon"></div>
@@ -35,11 +45,6 @@
         <div id="pokePicText"></div>
     </div>
 
-    <input type="button" value="A Wild Pokémon Appears!" onclick="play()">
-    <audio id="audio" src="assets/sounds/107-battle (vs wild pokemon).mp3"></audio>
-
-    <input type="button" value="Gotcha! Wild currentPokemon was caught!" onclick="caught()">
-    <audio id="caught" src="assets/sounds/108-victory (vs wild pokemon).mp3"></audio>
 
     <script src="./assets/javascript/game.js"></script>
 </body>
