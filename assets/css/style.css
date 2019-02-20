@@ -1,7 +1,12 @@
-.banner {
+#banner {
     position: static;
     width: 100%;
-    margin-top: -20px;
+    margin-top: -15px;
+    top: 0;
+    left: 0;
+    right: 0;
+
+
 }
 
 h1 {
@@ -15,16 +20,17 @@ body {
     font-family: 'Fredoka One',
         cursive;
     width: 100%;
-    opacity: 10%;
+    opacity: 20%;
 }
 
 #background {
     position: absolute;
     filter: brightness(130%);
     z-index: -1;
-    /* margin-top: -50px; */
     width: 100%;
 }
+
+input {}
 
 
 /* Fonts!
