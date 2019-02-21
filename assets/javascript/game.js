@@ -1,5 +1,6 @@
 // Get elements
-var pokemonText = document.getElementById("pokemon");
+var pokemonBlank = document.getElementById("pokemonBlank-text");
+
 
 
 // Various variables to collect data
@@ -82,7 +83,28 @@ function printCurrentPokemon() {
 }
 
 
-// for (i = 0; i < )
+// for (var i = 0; i < pokeSplit.length; i++) {
+//     var element = createElement("div")
+//     element.textContent = "_ ";
+//     pokemonBlank.appendChild(element);
+// }
+
+// Take pokeSplit and put it into an array
+// Have for loop print out the new array
+// Take pokesplit and compare to user input
+for (let i = 0; i < pokeSplit.length; i++) {
+    if (userInput === pokesplit[i]) {
+        // add userinput to newpokearray[i];
+    } else if (userInput === newpokearray[i]) {
+        alert("you're already used that")
+    } else {
+        guesses--;
+    }
+}
+
+// run script to display newpokearray
+
+
 
 
 // Start up
