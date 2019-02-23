@@ -3,6 +3,7 @@ var pokemonBlank = document.getElementById("pokemonBlank-text");
 
 
 
+
 // Various variables to collect data
 var currentPokemon,
     guesses = 14,
@@ -11,23 +12,25 @@ var currentPokemon,
     pokeDexNumber,
     pokePic,
     pokeString,
-    userInput,
     pokeSplit = [],
-    pokeSplitBlanks = [];
+    userGuesses = [];
 
 // List out all pokemon
 var pokemonArray = [
-    "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetch'd", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "Mr. Mime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"
+    "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetchd", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "MrMime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"
 ]
 
 
 // New Game setup
 function newGame() {
     guesses = 14
+    userGuesses = [];
     newPokemon();
     currentPokemon = pokemonArray[pokemonNumber];
     splitArray();
-    printCurrentPokemon();
+    displayBlanks();
+    // lowPoke();
+
 }
 
 // Check console logs
@@ -35,9 +38,10 @@ function check() {
     console.log("user input: " + userInput);
     console.log("pokemon: " + currentPokemon);
     console.log("pokemon number " + pokemonNumber);
-    console.log("pokeDex: " + pokeDexNumber);
-    console.log("picture site: " + pokePic);
-    console.log("pokesplit " + pokeSplit);
+    // console.log("pokeDex: " + pokeDexNumber);
+    // console.log("picture site: " + pokePic);
+    console.log("pokeSplit " + pokeSplit);
+    console.log("guesses " + userGuesses);
     console.log("--------------------------------------------");
 }
 
@@ -52,6 +56,7 @@ function newPokemon() {
 function splitArray() {
     var str = currentPokemon;
     pokeSplit = str.split("");
+    return pokeSplit;
 }
 
 // combines the pokeDex number plus the pokemon website's link to pull the image
@@ -67,49 +72,46 @@ function urlCombine() {
 
 }
 
-// Needs work, changes the array to blanks
-for (var i = 0; i < pokeSplit.length; i++) {
-    pokeSplit[i] = "_ ";
-}
-
-// Prints blanks for each letter
-
-function printCurrentPokemon() {
+// Display blanks
+function displayBlanks() {
     for (var i = 0; i < pokeSplit.length; i++) {
-        var start = document.getElementById("pokeSplitBlanks");
-        var end = document.createTextNode(pokeSplit[i]);
-        start.appendChild(end);
+        newSpan = document.createElement("span")
+        newSpan.textContent = "_ ";
+        var pokeBlanksText = document.getElementById("pokeSplitBlanks");
+        pokeBlanksText.appendChild(newSpan);
     }
 }
 
+// function lowPoke() {
+//     for (let i = 0; i < pokeSplit.length; i++) {
+//         var lower = pokeSplit[i].toLowerCase;
+//         pokeSplit[i].push(lower);
 
-// for (var i = 0; i < pokeSplit.length; i++) {
-//     var element = createElement("div")
-//     element.textContent = "_ ";
-//     pokemonBlank.appendChild(element);
+//     }
 // }
 
-// Take pokeSplit and put it into an array
+
+
+// Take pokeSplit and put it into a new array with blanks
 // Have for loop print out the new array
-// Take pokesplit and compare to user input
-for (let i = 0; i < pokeSplit.length; i++) {
-    if (userInput === pokesplit[i]) {
-        // add userinput to newpokearray[i];
-    } else if (userInput === newpokearray[i]) {
-        alert("you're already used that")
-    } else {
-        guesses--;
-    }
-}
+// Take pokeSplit and compare to user input
+// for (let i = 0; i < pokeSplit.length; i++) {
+//     if (userInput === pokeSplit[i]) {
 
-// run script to display newpokearray
-
-
+//         // add userinput to newpokearray[i];
+//     } else if (userInput === newpokearray[i]) {
+//         alert("you have already used that letter")
+//     } else {
+//         guesses--;
+//     }
+// }
 
 
 // Start up
 newGame();
 check();
+
+
 
 // Grab users input
 document.addEventListener("keydown", checkKey)
@@ -121,35 +123,30 @@ function checkKey(key) {
 
         // Lowercase the input
         userInput = event.key.toLowerCase();
+        userGuesses.push(userInput);
         check();
 
+        for (var i = 0; i < pokeSplit.length; i++) {
+            if (userInput === pokeSplit[i].toLowerCase()) {
+                // pokeBlanksText.push(pokeSplit);
+                console.log("part of array: " + true);
 
-        if (userInput === pokeSplit) {
-            console.log("part of array: " + true);
+            }
+
         }
-
     }
 }
 
-//  Will use this logic to compare data
-// var contains = function (haystack, needle) {
-//     return !!~haystack.indexOf(needle);
-// };
-
-// // can be used like so now:
-// if (contains(items, 3452)) {
-//     // do something else...
-// }
-
-
 // Play beginning audio
-function play() {
+function battle() {
+    audio.pause();
     var audio = document.getElementById("audio");
     audio.play();
 }
 
 // Play victory audio
 function caught() {
+    audio.pause()
     var audio = document.getElementById("caught");
     audio.play();
 }
@@ -170,7 +167,22 @@ var src = document.getElementById("pokePicText");
 src.appendChild(img);
 
 
+//  Will use this logic to compare data
+// var contains = function (haystack, needle) {
+//     return !!~haystack.indexOf(needle);
+// };
 
+// // can be used like so now:
+// if (contains(items, 3452)) {
+//     // do something else...
+// }
+
+// Dominic code
+// for (var i = 0; i < pokeSplit.length; i++) {
+
+//     document.getElementById("pokeSplitBlanks").innerHTML = document.getElementById("pokeSplitBlanks").innerHTML + "<span id='letter" + i + "'> _ </span>";
+
+// }
 
 // Audio attempts....
 // var audio = document.createElement("audio");
