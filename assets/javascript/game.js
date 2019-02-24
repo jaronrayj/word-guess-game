@@ -45,7 +45,7 @@ function check() {
 
 // Retrive new pokemon from array
 function newPokemon() {
-    pokemonNumber = Math.floor(Math.random() * 152);
+    pokemonNumber = Math.floor(Math.random() * 151);
     pokeDexNumber = pokemonNumber + 1;
     urlCombine();
 }
@@ -62,7 +62,8 @@ function splitArray() {
 function displayBlanks() {
     for (var i = 0; i < pokeSplit.length; i++) {
         newSpan = document.createElement("span");
-        newSpan.setAttribute("id", pokeSplit[i].toLowerCase());
+        var newId = pokeSplit[i].toLowerCase() + i;
+        newSpan.setAttribute("id", newId);
         newSpan.textContent = "_ ";
         var pokeBlanksText = document.getElementById("pokeSplitBlanks");
         pokeBlanksText.appendChild(newSpan);
@@ -104,7 +105,10 @@ function checkKey(key) {
         check();
         for (var i = 0; i < pokeSplit.length; i++) {
             if (userInput === pokeSplit[i].toLowerCase()) {
-                document.getElementById(userInput).textContent = userInput + " ";
+                elem = document.getElementById(userInput + i);
+                elem.textContent = userInput + " ";
+
+                console.log(elem);
                 console.log("part of array " + true);
                 // if (document.getElementsByClassName(userInput).textContent === userInput + " ") {
                 // document.getElementById
