@@ -11,11 +11,13 @@ var currentPokemon,
     pokePic,
     pokeString,
     pokeSplit = [],
-    userGuesses = [];
+    userGuesses = [],
+    correct = 0,
+    completeArray = [];
 
 // List out all pokemon
 var pokemonArray = [
-    "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetchd", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "MrMime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"
+    "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran", "Nidorina", "Nidoqueen", "Nidoran", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetchd", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "MrMime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"
 ]
 
 
@@ -38,7 +40,10 @@ function check() {
     // console.log("pokeDex: " + pokeDexNumber);
     // console.log("picture site: " + pokePic);
     console.log("pokeSplit " + pokeSplit);
-    console.log("guesses " + userGuesses);
+    console.log("letters guessed " + userGuesses);
+    console.log("guesses left " + guesses);
+    console.log("correct " + correct);
+    console.log("complete array " + completeArray);
 
     console.log("--------------------------------------------");
 }
@@ -54,7 +59,7 @@ function newPokemon() {
 function splitArray() {
     var str = currentPokemon;
     pokeSplit = str.split("");
-    return pokeSplit;
+
 }
 
 
@@ -67,6 +72,8 @@ function displayBlanks() {
         newSpan.textContent = "_ ";
         var pokeBlanksText = document.getElementById("pokeSplitBlanks");
         pokeBlanksText.appendChild(newSpan);
+        completeArray.push(newId);
+
     }
 }
 
@@ -84,12 +91,24 @@ function urlCombine() {
 
 }
 
+function lost() {
+    alert("you lost");
+}
+
+function win() {
+    alert("you won");
+}
+
 
 // Start up
 newGame();
 check();
 
-
+// search for element
+var myEle = document.getElementById("myElement");
+if (myEle) {
+    var myEleValue = myEle.value;
+}
 
 // Grab users input
 document.addEventListener("keydown", checkKey)
@@ -101,35 +120,60 @@ function checkKey(key) {
 
         // Lowercase the input
         userInput = event.key.toLowerCase();
-        userGuesses.push(userInput);
-        check();
+        // if (pokeSplit.includes(userInput)) {
+        //     correct++;
+        // }
         for (var i = 0; i < pokeSplit.length; i++) {
             if (userInput === pokeSplit[i].toLowerCase()) {
-                elem = document.getElementById(userInput + i);
+                var user = userInput + i
+                var index = completeArray.indexOf(user);
+                elem = document.getElementById(user);
                 elem.textContent = userInput + " ";
+                userGuesses.push(userInput);
 
-                console.log(elem);
-                console.log("part of array " + true);
-                // if (document.getElementsByClassName(userInput).textContent === userInput + " ") {
-                // document.getElementById
+                if (index > -1) {
+                    completeArray.splice(index, 1);
+                }
+
+                if (completeArray.length === 0) {
+                    win();
+                }
+
+            } else if (userGuesses.includes(userInput)) {
+                userGuesses.push(userInput);
+
+                // do nothing
+
+            } else {
+                userGuesses.push(userInput);
+                guesses--;
+                if (guesses === 0) {
+                    lost();
+                }
             }
         }
     }
+    check();
 }
+
 
 
 // Play beginning audio
+var battleMusic = document.getElementById("battle");
+
 function battle() {
-    audio.pause();
-    var audio = document.getElementById("audio");
-    audio.play();
+    caughtMusic.pause();
+    caughtMusic.currentTime = 0;
+    battleMusic.play();
 }
 
 // Play victory audio
+var caughtMusic = document.getElementById("caught");
+
 function caught() {
-    audio.pause()
-    var audio = document.getElementById("caught");
-    audio.play();
+    battleMusic.pause();
+    battleMusic.currentTime = 0;
+    caughtMusic.play();
 }
 
 // Attempt at stopping the music....
