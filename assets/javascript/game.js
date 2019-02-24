@@ -23,7 +23,7 @@ var pokemonArray = [
 
 // New Game setup
 function newGame() {
-    guesses = 14
+    guesses = 10
     userGuesses = [];
     newPokemon();
     currentPokemon = pokemonArray[pokemonNumber];
@@ -36,14 +36,13 @@ function newGame() {
 function check() {
     console.log("user input: " + userInput);
     console.log("pokemon: " + currentPokemon);
-    console.log("pokemon number " + pokemonNumber);
+    // console.log("pokemon number " + pokemonNumber);
     // console.log("pokeDex: " + pokeDexNumber);
     // console.log("picture site: " + pokePic);
-    console.log("pokeSplit " + pokeSplit);
-    console.log("letters guessed " + userGuesses);
+    // console.log("pokeSplit " + pokeSplit);
+    // console.log("letters guessed " + userGuesses);
     console.log("guesses left " + guesses);
-    console.log("correct " + correct);
-    console.log("complete array " + completeArray);
+    // console.log("complete array " + completeArray);
 
     console.log("--------------------------------------------");
 }
@@ -104,11 +103,6 @@ function win() {
 newGame();
 check();
 
-// search for element
-var myEle = document.getElementById("myElement");
-if (myEle) {
-    var myEleValue = myEle.value;
-}
 
 // Grab users input
 document.addEventListener("keydown", checkKey)
@@ -120,9 +114,6 @@ function checkKey(key) {
 
         // Lowercase the input
         userInput = event.key.toLowerCase();
-        // if (pokeSplit.includes(userInput)) {
-        //     correct++;
-        // }
         for (var i = 0; i < pokeSplit.length; i++) {
             if (userInput === pokeSplit[i].toLowerCase()) {
                 var user = userInput + i
@@ -131,19 +122,23 @@ function checkKey(key) {
                 elem.textContent = userInput + " ";
                 userGuesses.push(userInput);
 
+                // logic to remove elements from completed array
                 if (index > -1) {
                     completeArray.splice(index, 1);
                 }
 
+                // If completedarray clears then wins
                 if (completeArray.length === 0) {
                     win();
                 }
 
             } else if (userGuesses.includes(userInput)) {
                 userGuesses.push(userInput);
-
                 // do nothing
 
+            } else if (pokeSplit.includes(userInput)) {
+                userGuesses.push(userInput);
+                console.log(true);
             } else {
                 userGuesses.push(userInput);
                 guesses--;
