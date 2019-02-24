@@ -2,8 +2,6 @@
 var pokemonBlank = document.getElementById("pokemonBlank-text");
 
 
-
-
 // Various variables to collect data
 var currentPokemon,
     guesses = 14,
@@ -29,7 +27,6 @@ function newGame() {
     currentPokemon = pokemonArray[pokemonNumber];
     splitArray();
     displayBlanks();
-    // lowPoke();
 
 }
 
@@ -42,6 +39,7 @@ function check() {
     // console.log("picture site: " + pokePic);
     console.log("pokeSplit " + pokeSplit);
     console.log("guesses " + userGuesses);
+
     console.log("--------------------------------------------");
 }
 
@@ -59,6 +57,19 @@ function splitArray() {
     return pokeSplit;
 }
 
+
+// Display blanks
+function displayBlanks() {
+    for (var i = 0; i < pokeSplit.length; i++) {
+        newSpan = document.createElement("span");
+        newSpan.setAttribute("id", pokeSplit[i].toLowerCase());
+        newSpan.textContent = "_ ";
+        var pokeBlanksText = document.getElementById("pokeSplitBlanks");
+        pokeBlanksText.appendChild(newSpan);
+    }
+}
+
+
 // combines the pokeDex number plus the pokemon website's link to pull the image
 function urlCombine() {
     var url = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
@@ -71,40 +82,6 @@ function urlCombine() {
     }
 
 }
-
-// Display blanks
-function displayBlanks() {
-    for (var i = 0; i < pokeSplit.length; i++) {
-        newSpan = document.createElement("span")
-        newSpan.textContent = "_ ";
-        var pokeBlanksText = document.getElementById("pokeSplitBlanks");
-        pokeBlanksText.appendChild(newSpan);
-    }
-}
-
-// function lowPoke() {
-//     for (let i = 0; i < pokeSplit.length; i++) {
-//         var lower = pokeSplit[i].toLowerCase;
-//         pokeSplit[i].push(lower);
-
-//     }
-// }
-
-
-
-// Take pokeSplit and put it into a new array with blanks
-// Have for loop print out the new array
-// Take pokeSplit and compare to user input
-// for (let i = 0; i < pokeSplit.length; i++) {
-//     if (userInput === pokeSplit[i]) {
-
-//         // add userinput to newpokearray[i];
-//     } else if (userInput === newpokearray[i]) {
-//         alert("you have already used that letter")
-//     } else {
-//         guesses--;
-//     }
-// }
 
 
 // Start up
@@ -125,17 +102,17 @@ function checkKey(key) {
         userInput = event.key.toLowerCase();
         userGuesses.push(userInput);
         check();
-
         for (var i = 0; i < pokeSplit.length; i++) {
             if (userInput === pokeSplit[i].toLowerCase()) {
-                // pokeBlanksText.push(pokeSplit);
-                console.log("part of array: " + true);
-
+                document.getElementById(userInput).textContent = userInput + " ";
+                console.log("part of array " + true);
+                // if (document.getElementsByClassName(userInput).textContent === userInput + " ") {
+                // document.getElementById
             }
-
         }
     }
 }
+
 
 // Play beginning audio
 function battle() {
@@ -160,11 +137,38 @@ Audio.prototype.stop = function () {
 
 // Pull the image and insert it into the HTML
 var img = document.createElement("img");
-
 img.src = pokePic;
 var src = document.getElementById("pokePicText");
-
 src.appendChild(img);
+
+// function getChildIndex(child) {
+//     var parent = child.parentNode;
+//     var i = parent.children.length - 1;
+//     for (; i >= 0; i--) {
+//         if (child == parent.children[i]) {
+//             break;
+//         }
+//     }
+//     return i;
+// };
+// var element = document.getElementById("pokeSplitBlanks");
+// var index = getChildIndex(element);
+// console.log(index);
+
+
+// Take pokeSplit and put it into a new array with blanks
+// Have for loop print out the new array
+// Take pokeSplit and compare to user input
+// for (let i = 0; i < pokeSplit.length; i++) {
+//     if (userInput === pokeSplit[i]) {
+
+//         // add userinput to newpokearray[i];
+//     } else if (userInput === newpokearray[i]) {
+//         alert("you have already used that letter")
+//     } else {
+//         guesses--;
+//     }
+// }
 
 
 //  Will use this logic to compare data
