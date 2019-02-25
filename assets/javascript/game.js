@@ -34,7 +34,7 @@ function newGame() {
     currentPokemon = pokemonArray[pokemonNumber];
     splitArray();
     displayBlanks();
-    imageCreate();
+    // imageCreate();
     check();
 }
 
@@ -56,7 +56,7 @@ function check() {
 
 // Retrive new pokemon from array
 function newPokemon() {
-    pokemonNumber = Math.floor(Math.random() * 151);
+    pokemonNumber = Math.floor(Math.random() * pokemonArray.length);
     pokeDexNumber = pokemonNumber + 1;
     urlCombine();
 }
