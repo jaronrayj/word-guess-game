@@ -13,7 +13,8 @@ var currentPokemon,
     pokeSplit = [],
     userGuesses = [],
     correct = 0,
-    completeArray = [];
+    completeArray = [],
+    cleanSlateArray = [];
 
 // List out all pokemon
 var pokemonArray = [
@@ -23,13 +24,18 @@ var pokemonArray = [
 
 // New Game setup
 function newGame() {
+    // document.getElementById("img1").style.zIndex = "1";
     guesses = 10
     userGuesses = [];
+    pokeSplit = [];
+    cleanSlate();
+    cleanSlateArray = [];
     newPokemon();
     currentPokemon = pokemonArray[pokemonNumber];
     splitArray();
     displayBlanks();
-
+    imageCreate();
+    check();
 }
 
 // Check console logs
@@ -43,6 +49,7 @@ function check() {
     // console.log("letters guessed " + userGuesses);
     console.log("guesses left " + guesses);
     // console.log("complete array " + completeArray);
+    console.log("clean slate array " + cleanSlateArray);
 
     console.log("--------------------------------------------");
 }
@@ -61,6 +68,20 @@ function splitArray() {
 
 }
 
+// removes extra elements
+function cleanSlate() {
+    for (var i = 0; i < cleanSlateArray.length; i++) {
+        removeElement(cleanSlateArray[i]);
+    }
+}
+
+
+function removeElement(elementId) {
+    // Removes an element from the document
+    var elem = document.getElementById(elementId);
+    elem.parentNode.removeChild(elem);
+}
+
 
 // Display blanks
 function displayBlanks() {
@@ -72,9 +93,12 @@ function displayBlanks() {
         var pokeBlanksText = document.getElementById("pokeSplitBlanks");
         pokeBlanksText.appendChild(newSpan);
         completeArray.push(newId);
+        cleanSlateArray.push(newId);
+
 
     }
 }
+
 
 
 // combines the pokeDex number plus the pokemon website's link to pull the image
@@ -92,16 +116,18 @@ function urlCombine() {
 
 function lost() {
     alert("you lost");
+    // document.getElementById("img1").style.zIndex = "1";
 }
 
 function win() {
     alert("you won");
+    // document.getElementById("img1").style.zIndex = "1";
 }
 
 
 // Start up
 newGame();
-check();
+
 
 
 // Grab users input
@@ -111,6 +137,7 @@ function checkKey(key) {
 
     // Only letters will be pulled
     if (key.keyCode >= "65" && key.keyCode <= "90") {
+        check();
 
         // Lowercase the input
         userInput = event.key.toLowerCase();
@@ -130,6 +157,7 @@ function checkKey(key) {
                 // If completedarray clears then wins
                 if (completeArray.length === 0) {
                     win();
+
                 }
 
             } else if (userGuesses.includes(userInput)) {
@@ -147,10 +175,11 @@ function checkKey(key) {
                 }
             }
         }
+
     }
-    check();
 }
 
+document.getElementById("startOver").addEventListener("click", newGame);
 
 
 // Play beginning audio
@@ -171,85 +200,12 @@ function caught() {
     caughtMusic.play();
 }
 
-// Attempt at stopping the music....
-Audio.prototype.stop = function () {
-    this.pause();
-    this.currentTime = 0;
-};
 
 
 // Pull the image and insert it into the HTML
-var img = document.createElement("img");
-img.src = pokePic;
-var src = document.getElementById("pokePicText");
-src.appendChild(img);
-
-// function getChildIndex(child) {
-//     var parent = child.parentNode;
-//     var i = parent.children.length - 1;
-//     for (; i >= 0; i--) {
-//         if (child == parent.children[i]) {
-//             break;
-//         }
-//     }
-//     return i;
-// };
-// var element = document.getElementById("pokeSplitBlanks");
-// var index = getChildIndex(element);
-// console.log(index);
-
-
-// Take pokeSplit and put it into a new array with blanks
-// Have for loop print out the new array
-// Take pokeSplit and compare to user input
-// for (let i = 0; i < pokeSplit.length; i++) {
-//     if (userInput === pokeSplit[i]) {
-
-//         // add userinput to newpokearray[i];
-//     } else if (userInput === newpokearray[i]) {
-//         alert("you have already used that letter")
-//     } else {
-//         guesses--;
-//     }
-// }
-
-
-//  Will use this logic to compare data
-// var contains = function (haystack, needle) {
-//     return !!~haystack.indexOf(needle);
-// };
-
-// // can be used like so now:
-// if (contains(items, 3452)) {
-//     // do something else...
-// }
-
-// Dominic code
-// for (var i = 0; i < pokeSplit.length; i++) {
-
-//     document.getElementById("pokeSplitBlanks").innerHTML = document.getElementById("pokeSplitBlanks").innerHTML + "<span id='letter" + i + "'> _ </span>";
-
-// }
-
-// Audio attempts....
-// var audio = document.createElement("audio");
-// audio.src = "../sounds/107-battle (vs wild pokemon).mp3"
-// audio.play();
-
-
-// var audio = document.createElement("wildAppear");
-// audio.src = "../sounds/pokemon-battle.mp3"
-// audio.play();
-
-// function playAudio(url) {
-//     var audio = document.createElement('audio');
-//     audio.src = url;
-//     audio.style.display = "none"; //added to fix ios issue
-//     audio.autoplay = false; //avoid the user has not interacted with your page issue
-//     audio.onended = function () {
-//         audio.remove(); //remove after playing to clean the Dom
-//     };
-//     document.body.appendChild(audio);
-// }
-
-// playAudio("../sounds/pokemon-battle.mp3")
+function imageCreate() {
+    var img = document.createElement("img");
+    img.src = pokePic;
+    var src = document.getElementById("pokePicText");
+    src.appendChild(img);
+}

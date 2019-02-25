@@ -29,24 +29,51 @@
         <h2>Type letters to catch the Pokémon! (First 151 Pokémon only)</h2>
         <br>
 
-        <input class="my-1" type="button" value="A Wild Pokémon Appears!" onclick="battle()">
-        <audio id="battle" src="assets/sounds/107-battle (vs wild pokemon).mp3"></audio>
-
-        <input class="my-1" type="button" value="Gotcha! Wild currentPokemon was caught!" onclick="caught()">
-        <audio id="caught" src="assets/sounds/108-victory (vs wild pokemon).mp3"></audio>
-
-        <div id="wildAppear"></div>
-        <div id="pokeSplitBlanks"></div>
-        <div id="pokemonBlank-text"></div>
-        <div id="pokemon"></div>
-        <!-- <div id="pokemon"></div>
-        <div id="pokemon"></div>
-        <div id="pokemon"></div> -->
-        <div id="pokePicText"></div>
-    </div>
 
 
-    <script src="./assets/javascript/game.js"></script>
+
+        <!-- First box Pokemon appearing -->
+        <div id="appear" class="card">
+            <div class="card-header">
+                A Wild Pokemon Appears!
+            </div>
+            <div class="card-body">
+                <p class="card-text">Type letters to catch the Pokemon</p>
+            </div>
+        </div>
+
+        <!-- Guessing letters -->
+        <div id="" class="container">
+            <div id="wildAppear">
+                <input class="my-1" type="button" value="Try to catch it!" onclick="battle()">
+                <audio id="battle" src="assets/sounds/107-battle (vs wild pokemon).mp3"></audio>
+                <div id="pokeSplitBlanks"></div>
+            </div>
+            <div id="pokemonBlank-text"></div>
+            <div id="pokemon"></div>
+
+        </div>
+
+        <!-- Caught text! -->
+        <div id="caught-text" class="container">
+            <div class="col-md-6">
+                <input class="my-1" type="button" value="Gotcha! Wild currentPokemon was caught!" onclick="caught()">
+                <audio id="caught" src="assets/sounds/108-victory (vs wild pokemon).mp3"></audio>
+            </div>
+        </div>
+
+
+
+        <!-- Link to pokedex and picture -->
+        <div id="pokedex-info-text" class="">
+            <div class="col-md-6">
+                <div id="pokePicText"></div>
+                <input id="startOver" class="my-1" type="button" value="Can you catch them all?">
+            </div>
+        </div>
+
+
+        <script src="./assets/javascript/game.js"></script>
 </body>
 
 </html>
