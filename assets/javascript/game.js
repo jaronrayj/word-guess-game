@@ -34,7 +34,7 @@ function newGame() {
     currentPokemon = pokemonArray[pokemonNumber];
     splitArray();
     displayBlanks();
-    // imageCreate();
+    imageCreate();
     check();
 }
 
