@@ -1,7 +1,3 @@
-// Get elements
-var pokemonBlank = document.getElementById("pokemonBlank-text");
-
-
 // Various variables to collect data
 var currentPokemon,
     guesses = 14,
@@ -49,7 +45,7 @@ function check() {
     // console.log("letters guessed " + userGuesses);
     console.log("guesses left " + guesses);
     // console.log("complete array " + completeArray);
-    console.log("clean slate array " + cleanSlateArray);
+    // console.log("clean slate array " + cleanSlateArray);
 
     console.log("--------------------------------------------");
 }
@@ -87,7 +83,7 @@ function removeElement(elementId) {
 function displayBlanks() {
     for (var i = 0; i < pokeSplit.length; i++) {
         newSpan = document.createElement("span");
-        var newId = pokeSplit[i].toLowerCase() + i;
+        var newId = pokeSplit[i].toUpperCase() + i;
         newSpan.setAttribute("id", newId);
         newSpan.textContent = "_ ";
         var pokeBlanksText = document.getElementById("pokeSplitBlanks");
@@ -120,9 +116,12 @@ function lost() {
 }
 
 function win() {
+    caughtInput();
     alert("you won");
     // document.getElementById("img1").style.zIndex = "1";
 }
+
+
 
 
 // Start up
@@ -140,9 +139,9 @@ function checkKey(key) {
         check();
 
         // Lowercase the input
-        userInput = event.key.toLowerCase();
+        userInput = event.key.toUpperCase();
         for (var i = 0; i < pokeSplit.length; i++) {
-            if (userInput === pokeSplit[i].toLowerCase()) {
+            if (userInput === pokeSplit[i].toUpperCase()) {
                 var user = userInput + i
                 var index = completeArray.indexOf(user);
                 elem = document.getElementById(user);
@@ -157,7 +156,6 @@ function checkKey(key) {
                 // If completedarray clears then wins
                 if (completeArray.length === 0) {
                     win();
-
                 }
 
             } else if (userGuesses.includes(userInput)) {
@@ -198,6 +196,12 @@ function caught() {
     battleMusic.pause();
     battleMusic.currentTime = 0;
     caughtMusic.play();
+}
+
+// Change input to current pokemon
+function caughtInput() {
+    var a = document.getElementById("caughtInput-text");
+    a.value = "Gotcha! Wild " + currentPokemon + " was caught!";
 }
 
 

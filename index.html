@@ -33,47 +33,57 @@
 
 
         <!-- First box Pokemon appearing -->
-        <div id="appear" class="card">
+        <div id="wildPokemon" class="card">
             <div class="card-header">
                 A Wild Pokemon Appears!
             </div>
+        </div>
+        <input class="my-1" type="button" value="Try to catch it!" onclick="battle()">
+
+
+        <!-- Second box guessing pokemon -->
+        <audio id="battle" src="assets/sounds/107-battle (vs wild pokemon).mp3"></audio>
+        <div id="appear">
+            <div class="card">
+                <div class="card-header">Type letters to catch the Pokemon </div>
+            </div>
             <div class="card-body">
-                <p class="card-text">Type letters to catch the Pokemon</p>
+                <div id="wildAppear" class="card-text">
+                    <audio id="battle" src="assets/sounds/107-battle (vs wild pokemon).mp3"></audio>
+                    <p class="card-text" id="pokeSplitBlanks"></p>
+                    <div id="guesses-text"></div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Guessing letters -->
-        <div id="" class="container">
-            <div id="wildAppear">
-                <input class="my-1" type="button" value="Try to catch it!" onclick="battle()">
-                <audio id="battle" src="assets/sounds/107-battle (vs wild pokemon).mp3"></audio>
-                <div id="pokeSplitBlanks"></div>
-            </div>
-            <div id="pokemonBlank-text"></div>
-            <div id="pokemon"></div>
+    <!-- Display Pokemon and add to party -->
+    <input id="caughtInput-text" class="my-1" type="button" onclick="caught()">
+    <audio id="caught" src="assets/sounds/108-victory (vs wild pokemon).mp3"></audio>
 
+    <!-- Guessing letters -->
+    <div id="" class="container">
+
+    </div>
+
+    <div id="pokeParty"></div>
+
+    </div>
+
+
+
+
+
+    <!-- Link to pokedex and picture -->
+    <div id="pokedex-info-text" class="">
+        <div class="col-md-6">
+            <div id="pokePicText"></div>
+            <input id="startOver" class="my-1" type="button" value="Can you catch them all?">
         </div>
-
-        <!-- Caught text! -->
-        <div id="caught-text" class="container">
-            <div class="col-md-6">
-                <input class="my-1" type="button" value="Gotcha! Wild currentPokemon was caught!" onclick="caught()">
-                <audio id="caught" src="assets/sounds/108-victory (vs wild pokemon).mp3"></audio>
-            </div>
-        </div>
+    </div>
 
 
-
-        <!-- Link to pokedex and picture -->
-        <div id="pokedex-info-text" class="">
-            <div class="col-md-6">
-                <div id="pokePicText"></div>
-                <input id="startOver" class="my-1" type="button" value="Can you catch them all?">
-            </div>
-        </div>
-
-
-        <script src="./assets/javascript/game.js"></script>
+    <script src="./assets/javascript/game.js"></script>
 </body>
 
 </html>
