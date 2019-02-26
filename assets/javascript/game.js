@@ -130,7 +130,7 @@ newGame();
 
 
 // Grab users input
-document.addEventListener("keydown", checkKey)
+document.addEventListener("keyup", checkKey)
 
 function checkKey(key) {
 
